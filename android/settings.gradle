@@ -1,0 +1,10 @@
+pluginManagement{
+    repositories{
+        maven{url "https://plugins.gradle.org/m2/"}
+        gradlePluginPortal()
+        google()
+    }
+}
+
+include ':app'
+rootProject.name='supashopa_test'

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">supashopa</string>
+    <string name="first_name">first_name</string>
+    <string name="title_activity_supashopa_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="network_error">OOOPS! Something went wrong! \n We cannot establish a connection at the moment. Please try again later.</string>
+    <string name="error_getting_items">OOOPS! \nA little problem fetching items for you\nTry refreshing</string>
+    <string name="refresh">refresh</string>
+    <string name="payment_details">Mpesa Payment Details</string>
+</resources>
