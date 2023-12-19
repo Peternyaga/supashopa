@@ -1,5 +1,7 @@
 package com.example.supashopa_test;
 
+import static android.view.View.GONE;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,7 +19,6 @@ import android.widget.Toolbar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,8 +37,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static android.view.View.GONE;
 
 public class shoppingActivity extends AppCompatActivity implements OnItemClickInterface, View.OnClickListener {
     RecyclerView recyclerView, searchRecyclerview;
@@ -118,7 +117,7 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
        cart.setOnClickListener(this);
        goBack=findViewById(R.id.goback);
        goBack.setOnClickListener(this);
-       logout=findViewById(R.id.logout);
+      // logout=findViewById(R.id.logout);
       // logout.setOnClickListener(this);
        itemsArrayList=new ArrayList<>();
        cartitems= new ArrayList<>();
@@ -240,8 +239,6 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
             public void onResponse(String response) {
                 progressBar.setVisibility(GONE);
                 recyclerView.setVisibility(View.VISIBLE);
-               // Toast.makeText(shoppingActivity.this, Constants.shopDbName, Toast.LENGTH_SHORT).show();
-
                 try {
                     jsonArray=new JSONArray(response);
 

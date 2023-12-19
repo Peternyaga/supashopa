@@ -4,6 +4,7 @@ public class ShopDetails {
     int shopCode;
     String shopname, shopdescription, shopimageurl,databaseName;
     float shoprating;
+    Double latitude, longitude, distance;
 
     public String getDatabaseName() {
         return databaseName;
@@ -13,13 +14,32 @@ public class ShopDetails {
         this.databaseName = databaseName;
     }
 
-    public ShopDetails(int shopCode, String shopname, String shopdescription, String shopimageurl, String databaseName, float shoprating) {
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
+    }
+
+    public ShopDetails(int shopCode, String shopname, String shopdescription, String shopimageurl, String databaseName, float shoprating, Double latitude, Double longitude, Double distance) {
         this.shopCode= shopCode;
         this.shopname = shopname;
         this.shopdescription = shopdescription;
         this.shopimageurl = shopimageurl;
         this.databaseName=databaseName;
         this.shoprating = shoprating;
+        this.latitude=latitude;
+        this.longitude = longitude;
+        this.distance = distance;
     }
 
     public int getShopCode() {

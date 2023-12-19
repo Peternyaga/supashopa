@@ -48,7 +48,7 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
     ArrayList<CartItems> arrayList;
     JSONArray finalCheckoutList;
     double total;
-    String shop; //name of shop database passed from shopping activity
+    String shopDb, shopName; //name of shop database passed from shopping activity
     private CartRecyclerviewAdapter adapter;
     SharedPreferences mySP;
 
@@ -77,7 +77,9 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
 
         Intent intent=getIntent();
         cartItems=intent.getStringArrayListExtra("cart items");
-        shop=intent.getStringExtra("shop");
+        shopDb =intent.getStringExtra("shop");
+        shopName=mySP.getString("shop_name", "");
+
         arrayList=new ArrayList<>();
 
         for (int i=0; i<cartItems.size(); i++){
@@ -89,7 +91,7 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
                 if (jsonObject.getString("product_picture").contains(Constants.IMAGESOFITEMS_ROOT_URL)){
                     itemImage=jsonObject.getString("product_picture");
                 }else {
-                    itemImage = Constants.IMAGESOFITEMS_ROOT_URL + Constants.shopName + "/" + jsonObject.getString("product_picture");
+                    itemImage = Constants.IMAGESOFITEMS_ROOT_URL + shopName+ "/" + jsonObject.getString("product_picture");
                 }
                 String price = jsonObject.getString("unit_price");
                 String category = jsonObject.getString("category");
@@ -132,9 +134,9 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
             idqnty=new JSONObject();
             id=arrayList.get(i).getProductid();
             quantity=arrayList.get(i).getQuantity();
-                idqnty.put("item id",id);
-                idqnty.put("quantity", quantity);
-                finalCheckoutList.put(idqnty);
+            idqnty.put("item id",id);
+            idqnty.put("quantity", quantity);
+            finalCheckoutList.put(idqnty);
         }
         final String finalItems=finalCheckoutList.toString();
         //Double total;
@@ -144,6 +146,8 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
             @Override
             public void onResponse(String response) {
                 tvProgressbarMsg.setText("Please wait.");
+                tvProgressbarMsg.setText(response);
+                //System.exit(0);
                 Toast.makeText(cartActivity.this, "response: "+ response, Toast.LENGTH_LONG).show();
                 try {
                     final JSONObject jsonObject=new JSONObject(response);
@@ -287,7 +291,7 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params=new HashMap<>();
                 params.put("userId", String.valueOf(userId));
-                params.put("total", String.valueOf((int)total));
+                params.put("subtotal", String.valueOf((int)total));
                 params.put("service_cost", ""+calculateServiceCost(total));
                 params.put("grand_total", ""+(total+calculateServiceCost(total)));
                 params.put("items", finalItems);

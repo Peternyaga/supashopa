@@ -3,7 +3,6 @@ package com.example.supashopa_test;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ShopsRecyclerviewAdapter extends RecyclerView.Adapter<ShopViewHolder> {
@@ -22,7 +22,8 @@ public class ShopsRecyclerviewAdapter extends RecyclerView.Adapter<ShopViewHolde
 
 
     public ShopsRecyclerviewAdapter(ArrayList<ShopDetails> shopDetails, Context context) {
-        this.shopDetails = shopDetails;
+        this.shopDetails = ShopsActivity.shops;
+        //this.shopDetails = shopDetails;
         this.context=context;
     }
 
@@ -52,7 +53,7 @@ public class ShopsRecyclerviewAdapter extends RecyclerView.Adapter<ShopViewHolde
 
             }
         });
-        holder.tvshopdescription.setText(shop.getShopdescription());
+        holder.tvshopdescription.setText(shop.getShopdescription()+"\n This shop is "+formatDistance(shop.getDistance())+" away.");
         holder.ratingBar.setRating(shop.getShoprating());
         try {
 
@@ -66,5 +67,15 @@ public class ShopsRecyclerviewAdapter extends RecyclerView.Adapter<ShopViewHolde
     @Override
     public int getItemCount() {
         return shopDetails.size();
+    }
+
+    private String formatDistance (Double distance){
+        if (distance<1){
+            distance = distance*1000;
+            return distance.intValue() + "m";
+        }else {
+            DecimalFormat decimalFormat = new DecimalFormat("#.#");
+            return decimalFormat.format(distance)+"km";
+        }
     }
 }
