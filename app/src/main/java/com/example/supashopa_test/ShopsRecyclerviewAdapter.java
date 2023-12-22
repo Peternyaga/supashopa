@@ -42,9 +42,7 @@ public class ShopsRecyclerviewAdapter extends RecyclerView.Adapter<ShopViewHolde
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, shoppingActivity.class);
-                Constants.shopDbName =shop.getDatabaseName();
                 ShopsActivity.mySPEditor.putInt("shop_code", shop.getShopCode());
-                ShopsActivity.mySPEditor.putString("shop_db_name", shop.getDatabaseName());
                 ShopsActivity.mySPEditor.putString("shop_name", shop.getShopname());
                 ShopsActivity.mySPEditor.commit();
                 Constants.shopName=shop.getShopname();

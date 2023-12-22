@@ -2,19 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     android:targetSandboxVersion="2"
     android:versionCode="1"
-    android:versionName="1.0"
-    >
+    android:versionName="1.0">
 
     <supports-screens
         android:largeScreens="true"
-        android:xlargeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true"
-        />
+        android:xlargeScreens="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -25,33 +23,34 @@
         android:supportsRtl="true"
         android:testOnly="false"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        >
-
-        <activity android:name=".ShopsActivity"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".CreateShop"
+            android:exported="false" />
+        <activity
+            android:name=".ShopsActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".cartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".cartActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".signUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".signUpActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".login"
-            android:exported="false"/>
-
-        <activity android:name=".shoppingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login"
+            android:exported="false" />
+        <activity
+            android:name=".shoppingActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ui.SplashScreenActivity"
-            android:theme="@style/SplashTheme"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

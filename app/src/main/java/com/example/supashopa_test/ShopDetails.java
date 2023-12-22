@@ -2,17 +2,9 @@ package com.example.supashopa_test;
 
 public class ShopDetails {
     int shopCode;
-    String shopname, shopdescription, shopimageurl,databaseName;
+    String shopname, shopdescription, shopimageurl;
     float shoprating;
     Double latitude, longitude, distance;
-
-    public String getDatabaseName() {
-        return databaseName;
-    }
-
-    public void setDatabaseName(String databaseName) {
-        this.databaseName = databaseName;
-    }
 
     public Double getLatitude() {
         return latitude;
@@ -30,12 +22,11 @@ public class ShopDetails {
         this.distance = distance;
     }
 
-    public ShopDetails(int shopCode, String shopname, String shopdescription, String shopimageurl, String databaseName, float shoprating, Double latitude, Double longitude, Double distance) {
+    public ShopDetails(int shopCode, String shopname, String shopdescription, String shopimageurl,  float shoprating, Double latitude, Double longitude, Double distance) {
         this.shopCode= shopCode;
         this.shopname = shopname;
         this.shopdescription = shopdescription;
         this.shopimageurl = shopimageurl;
-        this.databaseName=databaseName;
         this.shoprating = shoprating;
         this.latitude=latitude;
         this.longitude = longitude;

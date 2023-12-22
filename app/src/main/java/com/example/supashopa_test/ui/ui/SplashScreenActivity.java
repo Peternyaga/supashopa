@@ -145,13 +145,12 @@ public class SplashScreenActivity extends AppCompatActivity {
                         String shopDescription=jsonObject.getString("shop description");
                         String shopPicURL=Constants.IMAGESOFSHOPS_ROOT_URL+jsonObject.getString("shop image URL");
                         int shopCode=jsonObject.getInt("shop code");
-                        String databaseName=jsonObject.getString("database name");
                         float shopRating= (float) jsonObject.getDouble("shop rating");
                         Double shopLatitude = jsonObject.getDouble("latitude");
                         Double shopLongitude = jsonObject.getDouble("longitude");
                         distanceFromShop = 0.0000;
                        // distanceFromShop = haversine(ShopsActivity.myLatitude, ShopsActivity.myLongitude, shopLatitude, shopLongitude);
-                        ShopsActivity.shops.add(new ShopDetails(shopCode, shopName,shopDescription, shopPicURL, databaseName, shopRating, shopLatitude, shopLongitude, distanceFromShop));
+                        ShopsActivity.shops.add(new ShopDetails(shopCode, shopName,shopDescription, shopPicURL, shopRating, shopLatitude, shopLongitude, distanceFromShop));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

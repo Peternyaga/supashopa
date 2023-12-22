@@ -294,13 +294,12 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
                         String shopDescription=jsonObject.getString("shop description");
                         String shopPicURL=Constants.IMAGESOFSHOPS_ROOT_URL+jsonObject.getString("shop image URL");
                         int shopCode=jsonObject.getInt("shop code");
-                        String databaseName=jsonObject.getString("database name");
                         float shopRating= (float) jsonObject.getDouble("shop rating");
                         Double shopLatitude = jsonObject.getDouble("latitude");
                         Double shopLongitude = jsonObject.getDouble("longitude");
 
                        distanceFromShop = haversine(myLatitude, myLongitude, shopLatitude, shopLongitude);
-                        shops.add(new ShopDetails(shopCode, shopName,shopDescription, shopPicURL, databaseName, shopRating, shopLatitude, shopLongitude, distanceFromShop));
+                        shops.add(new ShopDetails(shopCode, shopName,shopDescription, shopPicURL, shopRating, shopLatitude, shopLongitude, distanceFromShop));
 
                         for (int x = 0; x<shops.size(); x++){
                             distanceFromShop = shops.get(x).getDistance();
@@ -378,13 +377,12 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
                         String shopName=jsonObject.getString("shop name");
                         String shopDescription=jsonObject.getString("shop description");
                         String shopPicURL=Constants.IMAGESOFSHOPS_ROOT_URL+jsonObject.getString("shop image URL");
-                        String databaseName=jsonObject.getString("database name");
                         float shopRating= (float) jsonObject.getDouble("shop rating");
                         Double shopLatitude = jsonObject.getDouble("latitude");
                         Double shopLongitude = jsonObject.getDouble("longitude");
                         distanceFromShop = haversine(myLatitude, myLongitude, shopLatitude, shopLongitude);
 
-                        shops.add(new ShopDetails(shopCode, shopName,shopDescription, shopPicURL, databaseName ,shopRating, shopLatitude, shopLongitude, distanceFromShop));
+                        shops.add(new ShopDetails(shopCode, shopName,shopDescription, shopPicURL ,shopRating, shopLatitude, shopLongitude, distanceFromShop));
 
                         for (int x = 0; x<shops.size(); x++){
                             distanceFromShop = shops.get(x).getDistance();

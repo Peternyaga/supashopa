@@ -6,55 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".shoppingActivity" >
 
-<androidx.appcompat.widget.Toolbar
-    android:id="@+id/appbar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:layout_alignParentTop="true"
-    android:background="@color/colorPrimaryDark"
-    >
-    <Button
-        android:id="@+id/goback"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="1dp"
-        android:drawableStart="@drawable/ic_arrow_back_black_24dp"
-        android:background="@drawable/round_button"
-        />
+        android:background="@color/colorPrimaryDark">
 
-            <Button
-                android:id="@+id/cart"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/round_button"
-                android:drawableStart="@drawable/ic_shopping_cart"
-                android:minWidth="0dp"
-                android:padding="5dp"
-                />
+        <Button
+            android:id="@+id/goback"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/round_button"
+            android:drawableStart="@drawable/ic_arrow_back_black_24dp" />
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_items"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                app:iconifiedByDefault="false"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/round_button"
-                android:foregroundGravity="center"
-                android:gravity="bottom"
-                android:theme="@style/SearchViewStyle"
-                android:translationZ="2dp"
-                app:commitIcon="@drawable/ic_search"
-                app:queryHint="search items"
-                app:defaultQueryHint="search items"/>
+        <Button
+            android:id="@+id/cart"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/round_button"
+            android:drawableStart="@drawable/ic_shopping_cart"
+            android:minWidth="0dp"
+            android:padding="5dp" />
 
-    <!--app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_items"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/round_button"
+            android:foregroundGravity="center"
+            android:gravity="bottom"
+            android:theme="@style/SearchViewStyle"
+            android:translationZ="2dp"
+            app:commitIcon="@drawable/ic_search"
+            app:defaultQueryHint="search items"
+            app:iconifiedByDefault="false"
+            app:queryHint="search items" />
+
+        <!--app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@id/cart"
     app:layout_constraintHorizontal_bias="0.286"
     app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +61,7 @@
 
         <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
 
-</androidx.appcompat.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:id="@+id/tvitems"
@@ -75,7 +73,7 @@
         android:id="@+id/progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" />
     <LinearLayout
         android:id="@+id/error"
         android:layout_width="wrap_content"

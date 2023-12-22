@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateShop">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/create_shop_toolbar"
+        android:layout_width="412dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toTopOf="@+id/create_shop_scroller"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:title="@string/create_shop" />
+
+    <ScrollView
+        android:id="@+id/create_shop_scroller"
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:layout_marginStart="1dp"
+        android:padding="5dp"
+        android:scrollY="@android:dimen/thumbnail_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_shop_toolbar">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:padding="5dp"
+                    android:text="@string/enter_shop_name" />
+
+                <EditText
+                    android:id="@+id/enter_shop_name"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:height="48dp"
+                    android:hint="@string/enter_shop_name_hint"
+                    android:inputType="textMultiLine"
+                    android:maxLines="2"
+                    android:minLines="2" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:padding="5dp"
+                    android:text="@string/enter_shop_description" />
+
+                <EditText
+                    android:id="@+id/enter_shop_description"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:height="48dp"
+                    android:hint="@string/enter_shop_description_hint"
+                    android:inputType="textMultiLine"
+                    android:maxLines="10"
+                    android:minLines="4"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:padding="5dp"
+                    android:text="@string/select_shop_category" />
+
+                <Spinner
+                    android:id="@+id/select_shop_category"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:height="48dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:prompt="@string/select_shop_category_hint" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:padding="5dp"
+                    android:text="@string/select_shop_image" />
+
+                <ImageView
+                    android:id="@+id/select_shop_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="250dp"
+                    android:minHeight="100dp"
+                    android:scaleType="centerInside" />
+
+                <Button
+                    android:id="@+id/btn_select_shop_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_shop_image" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:padding="5dp"
+                    android:text="@string/select_payment_method" />
+
+                <Spinner
+                    android:id="@+id/select_payment_method"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:height="48dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:prompt="@string/select_shop_category_hint" />
+
+                <EditText
+                    android:id="@+id/enter_shortcode"
+                    style="@style/CustomTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:height="48dp"
+                    android:gravity="center_horizontal"
+                    android:hint="@string/enter_payment_details_hint"
+                    android:inputType="number"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <Button
+                    android:id="@+id/btn_create"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_shop" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

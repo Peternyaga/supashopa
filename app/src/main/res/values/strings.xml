@@ -14,4 +14,15 @@
     <string name="error_getting_items">OOOPS! \nA little problem fetching items for you\nTry refreshing</string>
     <string name="refresh">refresh</string>
     <string name="payment_details">Mpesa Payment Details</string>
+    <string name="create_shop">Create Your Shop</string>
+    <string name="enter_shop_name">Shop Name </string>
+    <string name="enter_shop_name_hint">enter your shop name here</string>
+    <string name="enter_shop_description">Shop Description</string>
+    <string name="enter_shop_description_hint">Write something about your shop here</string>
+    <string name="select_shop_category">category</string>
+    <string name="select_shop_category_hint">select your the type of your shop here</string>
+    <string name="select_shop_image">Select image</string>
+    <string name="select_shop_image_hint">Select an image for your shop. </string>
+    <string name="select_payment_method">Payment Method</string>
+    <string name="enter_payment_details_hint">Enter your Mpesa till number here</string>
 </resources>
