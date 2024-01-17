@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/profile"
+        android:icon="@drawable/ic_person"
+        android:title="my account"
+        android:orderInCategory="0"
+        />
+    <item android:id="@+id/create_shop"
+        android:title="@string/create_shop"
+        />
+
+    <item android:id="@+id/logout"
+        android:title="logout"/>
+</menu>

@@ -1,0 +1,15 @@
+<!-- res/drawable/outline_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background rectangle -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:color="@color/colorPrimary"
+                android:width="2dp" />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+    <!-- Content -->
+    <item android:drawable="@drawable/baseline_image_24" />
+</layer-list>

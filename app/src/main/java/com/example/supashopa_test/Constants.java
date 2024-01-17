@@ -17,6 +17,8 @@ public class Constants {
     public static final String URL_CHECKOUT= API_URL_2 +"checkout.php";
     public static  final String URL_SEARCHITEMS= API_URL_2 +"item_search.php";
     public static  final String URL_SHOPS= API_URL +"fetch_Shops.php";
+    public static  final String URL_FETCHSHOPCATEGORIES= API_URL +"fetch_shop_categories.php";
+    public static  final String URL_FETCHPAYMENTMETHODS= API_URL +"fetch_payment_methods.php";
     public static  final String urlSearchForShop= API_URL+ "search_For_Shop.php";
     public static final String CHECK_ORDER_STATUS= API_URL_2+"check_order_status.php";
     public static String shopDbName;//name of the shop the user has entered;

@@ -218,7 +218,7 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.shops_activity_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -226,6 +226,10 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.profile:
+                break;
+            case R.id.create_shop:
+                Intent intent = new Intent(getApplicationContext(), CreateShop.class);
+                startActivity(intent);
                 break;
             case R.id.logout:
                 final AlertDialog.Builder builder=new AlertDialog.Builder(this);

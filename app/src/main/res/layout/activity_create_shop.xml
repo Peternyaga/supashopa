@@ -8,20 +8,23 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/create_shop_toolbar"
-        android:layout_width="412dp"
-        android:layout_height="45dp"
-        app:layout_constraintBottom_toTopOf="@+id/create_shop_scroller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimaryDark"
+        app:titleTextAppearance="@style/Base.CardView"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:title="@string/create_shop" />
 
     <ScrollView
         android:id="@+id/create_shop_scroller"
         android:layout_width="match_parent"
-        android:layout_height="650dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="1dp"
+        android:layout_marginTop="60dp"
         android:padding="5dp"
         android:scrollY="@android:dimen/thumbnail_height"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -121,7 +124,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical"
-                android:padding="5dp">
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -133,10 +137,10 @@
                 <ImageView
                     android:id="@+id/select_shop_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxHeight="250dp"
-                    android:minHeight="100dp"
-                    android:scaleType="centerInside" />
+                    android:layout_height="250dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/outline_image_24"/>
 
                 <Button
                     android:id="@+id/btn_select_shop_image"
@@ -165,10 +169,10 @@
                     style="@style/CustomTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
                     android:height="48dp"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:layout_marginBottom="8dp"
                     android:prompt="@string/select_shop_category_hint" />
 
                 <EditText
