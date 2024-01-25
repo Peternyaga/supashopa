@@ -234,7 +234,7 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
     }
 
     private void productsrequest() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_FETCHITEMS,new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.urlFetchItems,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressBar.setVisibility(GONE);
@@ -242,7 +242,7 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
                 try {
                     jsonArray=new JSONArray(response);
 
-                    for (int i=0;i<response.length();i++){
+                    for (int i=0;i<jsonArray.length();i++){
 
                         JSONObject jsonObject = new JSONObject(jsonArray.getString(i));
                         int itemid = jsonObject.getInt("product_id");
@@ -262,7 +262,6 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressBar.setVisibility(GONE);
-                Toast.makeText(shoppingActivity.this, "error: "+ error.getMessage(), Toast.LENGTH_SHORT).show();
                 shoppingActivity.this.error.setVisibility(View.VISIBLE);
             }
         }) {
@@ -271,7 +270,6 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params=new HashMap<>();
                 params.put("shop_id", ""+mySP.getInt("shop_code",0));
-                params.put("shop_name", Constants.shopDbName);
                 return params;
             }
         };

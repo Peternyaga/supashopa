@@ -54,7 +54,6 @@ public class ShopsRecyclerviewAdapter extends RecyclerView.Adapter<ShopViewHolde
         holder.tvshopdescription.setText(shop.getShopdescription()+"\n This shop is "+formatDistance(shop.getDistance())+" away.");
         holder.ratingBar.setRating(shop.getShoprating());
         try {
-
             Picasso.get().load(shop.getShopimageurl()).fit().into(holder.ivshop);
         } catch (Exception e) {
             e.printStackTrace();

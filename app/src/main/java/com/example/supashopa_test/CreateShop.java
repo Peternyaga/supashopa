@@ -1,6 +1,5 @@
 package com.example.supashopa_test;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,18 +10,25 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,20 +36,28 @@ import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CreateShop extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private static final int SELECT_IMAGE_REQUEST_CODE = 1000;
-    Button selectImage;
+    EditText shopName, shortCode;
+    static  EditText shopDescription;
+    Button selectImage, createShop;
     ImageView shopImage;
     Spinner shopsCategoriesSpinner, paymentMethodsSpinner;
+    Boolean categorySelected = false;
+    Boolean paymentMethodSelected = false;
+    Boolean shopImageSelected = false;
     JSONArray shopCategories = new JSONArray();
     JSONArray paymentMethods = new JSONArray();
     ArrayList<String> categories = new ArrayList();
     ArrayList<String> methods = new ArrayList<>();
     Map params = new HashMap<>();
+    Map headers = new HashMap<>();
+    Bitmap selectedImageBitmap = null;
     ArrayAdapter<String> shopCategoriesAdapter, paymentMethodsAdapter;
 
     @Override
@@ -53,7 +67,12 @@ public class CreateShop extends AppCompatActivity implements View.OnClickListene
         Toolbar myToolBar = findViewById(R.id.create_shop_toolbar);
         setSupportActionBar(myToolBar);
 
+        shopName = findViewById(R.id.enter_shop_name);
+        shopDescription = findViewById(R.id.enter_shop_description);
+        shortCode = findViewById(R.id.enter_shortcode);
         shopImage = findViewById(R.id.select_shop_image);
+        createShop = findViewById(R.id.btn_create);
+        createShop.setOnClickListener(this);
         categories.add("Select your shop category");
         methods.add("select your a payment method");
         shopsCategoriesSpinner = findViewById(R.id.select_shop_category);
@@ -88,9 +107,49 @@ public class CreateShop extends AppCompatActivity implements View.OnClickListene
             case R.id.btn_select_shop_image:
                 fetchShopImage();
                 break;
+            case R.id.btn_create:
+                if (shopName.getText().toString().trim().length() > 0 && shopDescription.getText().toString().trim().length() > 0 && shortCode.getText().toString().trim().length() > 0 &&
+                categorySelected && paymentMethodSelected && shopImageSelected){
+                    if (ShopsActivity.myLatitude == null || ShopsActivity.myLongitude == null){
+                        Toast.makeText(this, "location access failed. Please go back and try again", Toast.LENGTH_LONG).show();
+                    }else {
+                        params.put("shop_name", shopName.getText().toString().trim());
+                        params.put("shop_description", shopDescription.getText().toString().trim());
+                        params.put("mpesa_till", shortCode.getText().toString().trim());
+                        params.put("latitude", ShopsActivity.myLatitude.toString());
+                        params.put("longitude", ShopsActivity.myLongitude.toString());
+                        headers.put("Content-Type", "multipart/form-data; boundary=----WebKitFormBoundary123");
+                    }
 
-            case R.id.select_shop_category:
+                    RequestQueue requestQueue = Volley.newRequestQueue(this);
+                    MultipartRequest multipartRequest = new MultipartRequest(Constants.urlCreateShop, null, params, "image/png", selectedImageBitmap,
+                            new Response.Listener<NetworkResponse>() {
+                                @Override
+                                public void onResponse(NetworkResponse response) {
+                                    try {
+                                        String responseString = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+                                        Toast.makeText(CreateShop.this, "RESPONSE: "+responseString, Toast.LENGTH_LONG).show();
+                                        shopDescription.setText(responseString);
+                                    } catch (UnsupportedEncodingException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(CreateShop.this, "ERROR: ++++++ "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                            shopDescription.setText("error: "+ error.getMessage());
+                        }
+                    });
+                    multipartRequest.setRetryPolicy(new DefaultRetryPolicy(10000, 2, 1));
+                    requestQueue.add(multipartRequest);
+                    Snackbar snackbar = Snackbar.make(findViewById(R.id.main_layout), params.toString(), Snackbar.LENGTH_LONG);
+                    snackbar.show();
 
+                    Toast.makeText(this, params.toString(), Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(this, "All fields are required", Toast.LENGTH_LONG).show();
+                }
         }
     }
 
@@ -102,21 +161,21 @@ public class CreateShop extends AppCompatActivity implements View.OnClickListene
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SELECT_IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
             Uri selectedImage = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(selectedImage);
-                Bitmap selectedImageBitmap = BitmapFactory.decodeStream(inputStream);
-
+                selectedImageBitmap = BitmapFactory.decodeStream(inputStream);
                 shopImage.setImageBitmap(selectedImageBitmap);
+                shopImageSelected = true;
                 shopImage.setMaxHeight(250);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
             Toast.makeText(this, "uri: " + selectedImage, Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Toast.makeText(this, "Result code: " + resultCode, Toast.LENGTH_SHORT).show();
-
         }
     }
 
@@ -134,7 +193,6 @@ public class CreateShop extends AppCompatActivity implements View.OnClickListene
                             jsonObject = jsonArray.getJSONObject(i);
                             categories.add(jsonObject.getString("category"));
                         }
-
                     }else if(requestCode == 2){
                         paymentMethods = jsonArray;
                             for (int i = 0; i <jsonArray.length(); i++){
@@ -159,11 +217,13 @@ public class CreateShop extends AppCompatActivity implements View.OnClickListene
             if(position > 0){
                 if (parent.getId() == R.id.select_shop_category){
                     jsonObject = new JSONObject(shopCategories.get(position - 1).toString());
-                    params.put("shop_category",jsonObject.get("id").toString());
-                    Toast.makeText(this, "params: " +params.toString(), Toast.LENGTH_SHORT).show();                    Toast.makeText(this, "selected item: SELECT CATEGORY" , Toast.LENGTH_SHORT).show();
+                    params.put("category",jsonObject.get("id").toString());
+                    categorySelected = true;
+                    Toast.makeText(this, "params: " +params.toString(), Toast.LENGTH_SHORT).show();
                 } else if (parent.getId() == R.id.select_payment_method) {
                     jsonObject = new JSONObject(paymentMethods.get(position - 1).toString());
-                    params.put("shop_category",jsonObject.get("id").toString());
+                    params.put("payment",jsonObject.get("id").toString());
+                    paymentMethodSelected = true;
                     Toast.makeText(this, "params: " +params.toString(), Toast.LENGTH_SHORT).show();
                 }
 

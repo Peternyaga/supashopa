@@ -185,7 +185,6 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
                                             builder.setTitle("CHECK OUT");
                                             builder.setMessage(alertMessage);
                                             builder.setCancelable(false);
-                                            final String finalAlertMessage = alertMessage;
                                             final int finalAlertCode= alertCode;
                                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 @Override
