@@ -34,6 +34,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.supashopa_test.shop_management.ShopManagement;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -230,6 +231,10 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.create_shop:
                 Intent intent = new Intent(getApplicationContext(), CreateShop.class);
+                startActivity(intent);
+                break;
+            case R.id.management:
+                intent = new Intent(getApplicationContext(), ShopManagement.class);
                 startActivity(intent);
                 break;
             case R.id.logout:

@@ -18,6 +18,9 @@ android {
         }
     }
     namespace 'com.example.supashopa_test'
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -29,10 +32,13 @@ dependencies {
     implementation 'androidx.test.ext:junit:1.1.5'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'org.jetbrains:annotations:15.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
     //implementation 'androidx.annotation:annotation-jvm:1.7.1'
     //implementation "androidx.lifecycle:lifecycle-process:2.5.1"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.11.0'
+   // implementation 'com.google.android.material:material:1.4.0'
+
 }

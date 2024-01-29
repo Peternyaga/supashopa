@@ -13,4 +13,7 @@
 
     <item android:id="@+id/logout"
         android:title="logout"/>
+
+    <item android:id="@+id/management"
+        android:title="shop management"/>
 </menu>

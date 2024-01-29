@@ -1,13 +1,13 @@
 package com.example.supashopa_test;
 
-public class Items {
+public class Item {
     private int productid;
     private String productname;
     private String productpic_url;
     private String price;
     private String category;
 
-    public Items(int id, String name, String pic_url, String price, String category){
+    public Item(int id, String name, String pic_url, String price, String category){
         this.productid=id;
         this.productname=name;
         this.productpic_url=pic_url;

@@ -48,11 +48,10 @@
         android:id="@+id/tv_networkerror"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableTop="@drawable/ic_error_outline_black_24dp"
         android:text="@string/network_error"
         android:textStyle="bold"
         android:gravity="center"
-        />
+        app:drawableTopCompat="@drawable/ic_error_outline_black_24dp" />
 
         <TextView
             android:id="@+id/tvrefresh"

@@ -16,13 +16,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class RecyclerviewAdapter extends RecyclerView.Adapter<ItemViewHolder> {
-    private ArrayList<Items> itemsArrayList;
+    private ArrayList<Item> itemsArrayList;
     private Context context;
     private final OnItemClickInterface onItemClickInterface;
     private int[] deactivateItems;
 
 
-    public RecyclerviewAdapter(ArrayList<Items> itemsArrayList, Context context, OnItemClickInterface onItemClickInterface, int[] deactivateItems) {
+    public RecyclerviewAdapter(ArrayList<Item> itemsArrayList, Context context, OnItemClickInterface onItemClickInterface, int[] deactivateItems) {
         this.itemsArrayList = itemsArrayList;
         this.context = context;
         this.onItemClickInterface=onItemClickInterface;
@@ -38,7 +38,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final ItemViewHolder holder, final int position){
-        final Items item=itemsArrayList.get(position);
+        final Item item=itemsArrayList.get(position);
         int quantity;
         holder.tvitemprice.setText("KSh \n"+item.getPrice());
         holder.tvitemname.setText(item.getProductname().toUpperCase());

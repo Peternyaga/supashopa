@@ -49,8 +49,8 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
 
     JSONArray jsonArray;
     private RecyclerviewAdapter adapter;
-    private ArrayList<Items> itemsArrayList;
-    ArrayList<Items> itemsArrayList1 =null;
+    private ArrayList<Item> itemsArrayList;
+    ArrayList<Item> itemsArrayList1 =null;
     public static ArrayList<String> cartitems;
     private int[] deactivateditems =new int[0];//used to deactivate items already in cart
     private String shop;
@@ -146,7 +146,7 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
                                     String price = jsonObject.getString("unit_price");
                                     String category = jsonObject.getString("category");
 
-                                    itemsArrayList1.add(new Items(itemid, itemname, itemimage, price, category));
+                                    itemsArrayList1.add(new Item(itemid, itemname, itemimage, price, category));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -251,7 +251,7 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
                         String price = jsonObject.getString("unit_price");
                         String category = jsonObject.getString("category");
 
-                        itemsArrayList.add(new Items(itemid, itemname, itemimage, price, category));
+                        itemsArrayList.add(new Item(itemid, itemname, itemimage, price, category));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -278,7 +278,7 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(7000, 2, 2));
     }//method to get items from remote source.
 
-    private void buildRecyclerView(ArrayList<Items> rvItems, int[] deactivateItems,RecyclerView recyclerView){
+    private void buildRecyclerView(ArrayList<Item> rvItems, int[] deactivateItems, RecyclerView recyclerView){
         adapter=new RecyclerviewAdapter(rvItems, shoppingActivity.this,this,deactivateItems);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(this,2);
         recyclerView.setHasFixedSize(true);
@@ -407,13 +407,14 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
 
     @Override
     public void onBackPressed() {
-        if (!(itemsArrayList1 ==null)) {
+        super.onBackPressed();
+        if (!(itemsArrayList1 == null)) {
             buildRecyclerView(itemsArrayList, deactivateditems, recyclerView);
             searchView.clearFocus();
             itemsArrayList1.clear();
-            itemsArrayList1 =null;
-        }else {
-            Intent intent=new Intent(this, ShopsActivity.class);
+            itemsArrayList1 = null;
+        } else {
+            Intent intent = new Intent(this, ShopsActivity.class);
             startActivity(intent);
             finish();
         }

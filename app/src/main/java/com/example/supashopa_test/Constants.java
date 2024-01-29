@@ -22,6 +22,8 @@ public class Constants {
     public static  final String urlSearchForShop= API_URL+ "search_For_Shop.php";
     public static final String CHECK_ORDER_STATUS= API_URL+"check_order_status.php";
     public static final String urlCreateShop= API_URL+"create_shop.php";
+    public static final String fetchInventory= API_URL+"fetch_my_inventory.php";
+    public static String myShopId = "1";
     public static String shopDbName;//name of the shop the user has entered;
     public static String shopName;
     public static int recursion=0;

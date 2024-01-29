@@ -25,4 +25,10 @@
     <string name="select_shop_image_hint">Select an image for your shop. </string>
     <string name="select_payment_method">Payment Method</string>
     <string name="enter_payment_details_hint">Enter your Mpesa till number here</string>
+    <string name="title_activity_shop_management">ShopManagement</string>
+    <string name="out_of_stock">Out of stock</string>
+    <string name="edit">edit</string>
+    <string name="remove">remove</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>
