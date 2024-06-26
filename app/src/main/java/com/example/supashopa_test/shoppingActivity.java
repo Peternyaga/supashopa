@@ -5,11 +5,15 @@ import static android.view.View.GONE;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,6 +33,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.supashopa_test.shop_management.Item;
+import com.example.supashopa_test.shop_management.ShopManagement;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -145,8 +151,9 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
                                     String itemimage = Constants.IMAGESOFITEMS_ROOT_URL + Constants.shopName + "/" + jsonObject.getString("product_picture");
                                     String price = jsonObject.getString("unit_price");
                                     String category = jsonObject.getString("category");
+                                    int status = jsonObject.getInt("status");
 
-                                    itemsArrayList1.add(new Item(itemid, itemname, itemimage, price, category));
+                                    itemsArrayList1.add(new Item(itemid, itemname, itemimage, price, category, status));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -172,7 +179,7 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
                 return params;
             }
         };
-        requesthandler.getInstance(this).addTorequestQueue(stringRequest);
+        MyRequestHandler.getInstance(this).addTorequestQueue(stringRequest);
     }
 
 
@@ -187,7 +194,7 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.profile:
-                Toast.makeText(this, item.getTitle()+" selected", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, item.getTitle()+" selected", Toast.LENGTH_LONG).show();
                 return true;
 
             case R.id.logout:
@@ -225,8 +232,83 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
                     Toast.makeText(getApplicationContext(),"logged out",Toast.LENGTH_LONG).show();
                     Intent intent=new Intent(this,signUpActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 return true;
+
+            case  R.id.shop_admin:
+                if (mySP.getInt("shop_code", 0)>0&& mySP.contains("myShopCode")&&mySP.getInt("shop_code", 0)==mySP.getInt("myShopCode", 0)){
+                    Constants.myShopId = String.valueOf(mySP.getInt("myShopCode", 0));
+                    Intent intent = new Intent(getApplicationContext(), ShopManagement.class);
+                    startActivity(intent);
+                    return true;
+                }
+                AlertDialog.Builder shopkeeperLogin = new AlertDialog.Builder(shoppingActivity.this);
+                shopkeeperLogin.setCancelable(false);
+                shopkeeperLogin.setTitle("Shopkeeper Login");
+                View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.shokeeper_login,null);
+                LinearLayout linearLayout = (LinearLayout)view;
+                linearLayout.setOrientation(LinearLayout.VERTICAL);
+                EditText phone = view.findViewById(R.id.etShopkeeperPhone);
+                EditText password = view.findViewById(R.id.etShopkeeperPassword);
+                shopkeeperLogin.setPositiveButton("Ok", (dialog, which) -> {
+                    if(phone.getText().toString().isEmpty()){
+                        phone.setHighlightColor(Color.RED);
+                        Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else if (password.getText().toString().isEmpty()) {
+                        password.setHighlightColor(Color.RED);
+                        Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                            String encryptedPassword = password.getText().toString();
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.shopkeeperLogin, response -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.getInt("code")==0){
+                                Constants.myShopId = String.valueOf(mySP.getInt("shop_code", 0));
+                                mySPEditor.putString("shopkeeperName", jsonObject.getString("user"));
+                                mySPEditor.putInt("myShopCode", mySP.getInt("shop_code", 0));
+                                mySPEditor.commit();
+                                Intent intent = new Intent(getApplicationContext(), ShopManagement.class);
+                                startActivity(intent);
+                            }else{
+                                ViewGroup parent = (ViewGroup) linearLayout.getParent();
+                                if (parent != null) {
+                                    parent.removeView(linearLayout);
+                                }
+                                shopkeeperLogin.create().show();
+                                Toast.makeText(this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            Toast.makeText(this, "An error occurred. Try again", Toast.LENGTH_SHORT).show();
+                            throw new RuntimeException(e);
+                        }
+                    }, error -> {
+                        ViewGroup parent = (ViewGroup) linearLayout.getParent();
+                        if (parent != null) {
+                            parent.removeView(linearLayout);
+                        }
+                        shopkeeperLogin.setMessage(error.getMessage());
+                        shopkeeperLogin.create().show();
+                    }){
+                        @Nullable
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> params = new HashMap<>();
+                            params.put("shop_id", String.valueOf(mySP.getInt("shop_code", 0)));
+                            params.put("phone", phone.getText().toString());
+                            params.put("password", encryptedPassword);
+                            return params;
+                        }
+                    };
+                    MyRequestHandler.getInstance(this).addTorequestQueue(stringRequest);
+                }
+                );
+                shopkeeperLogin.setNegativeButton("Cancel", (dialog, which) -> {
+                });
+                shopkeeperLogin.setView(linearLayout);
+                shopkeeperLogin.create().show();
 
                 default:
                     return super.onOptionsItemSelected(item);
@@ -250,8 +332,9 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
                         String itemimage = Constants.IMAGESOFITEMS_ROOT_URL+Constants.shopName+"/"+jsonObject.getString("product_picture");
                         String price = jsonObject.getString("unit_price");
                         String category = jsonObject.getString("category");
+                        int status = jsonObject.getInt("status");
 
-                        itemsArrayList.add(new Item(itemid, itemname, itemimage, price, category));
+                        itemsArrayList.add(new Item(itemid, itemname, itemimage, price, category, status));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -273,7 +356,7 @@ public class shoppingActivity extends AppCompatActivity implements OnItemClickIn
                 return params;
             }
         };
-        requesthandler.getInstance(this).addTorequestQueue(stringRequest);
+        MyRequestHandler.getInstance(this).addTorequestQueue(stringRequest);
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(7000, 2, 2));
     }//method to get items from remote source.

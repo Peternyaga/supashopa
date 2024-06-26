@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".shop_management.AddInventoryItem">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/addInventoryItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@drawable/outline_with_rounded_edge"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Item Name"
+            />
+
+        <EditText
+            android:id="@+id/addInventoryItemDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@drawable/outline_with_rounded_edge"
+            android:ems="10"
+            android:layout_marginTop="10dp"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:hint="Enter item description"/>
+
+        <EditText
+            android:id="@+id/addInventoryItemPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/outline_with_rounded_edge"
+            android:elevation="10dp"
+            android:ems="10"
+            android:hint="Enter the price of this item"
+            android:inputType="number"
+            android:padding="5dp" />
+
+        <Spinner
+            android:id="@+id/addInventoryItemCategory"
+            style="@style/CustomTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="48dp"
+            android:height="48dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:elevation="10dp"
+            android:padding="5dp"
+            android:prompt="@string/select_shop_category_hint" />
+
+        <ImageView
+            android:id="@+id/addInventoryItemImage"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:maxHeight="250dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/outline_image_24"/>
+
+
+        <Button
+            android:id="@+id/pickInventoryItemImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="pick image" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAddInventoryItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:background="@drawable/round_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.908" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

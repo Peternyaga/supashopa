@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +36,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.supashopa_test.shop_management.ShopManagement;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -51,6 +52,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ShopsActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final int REQUEST_ENABLE_LOCATION = 12;
     public static ArrayList<ShopDetails> shops = new ArrayList<>();
     JSONArray jsonArray;
     RecyclerView shopsRecyclerView;
@@ -122,11 +124,15 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
         mySP = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         mySPEditor = mySP.edit();
 
+
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             String alertTitle = "Permission Request Alert";
             String alertMessage = "Supashopa will request for permission to access your location. Supashopa will use this data to determine shops close to you";
             requestLocationPermission(alertTitle, alertMessage);
-        } else {
+        } else if(!isLocationEnabled()){
+            enableLocationPrompt();
+        }else{
             locationIsEnabled = true;
             locationRequest = createLocationRequest();
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
@@ -233,10 +239,6 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
                 Intent intent = new Intent(getApplicationContext(), CreateShop.class);
                 startActivity(intent);
                 break;
-            case R.id.management:
-                intent = new Intent(getApplicationContext(), ShopManagement.class);
-                startActivity(intent);
-                break;
             case R.id.logout:
                 final AlertDialog.Builder builder=new AlertDialog.Builder(this);
                 builder.setCancelable(true);
@@ -271,7 +273,7 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
                                 return params;
                             }
                         };
-                        requesthandler.getInstance(ShopsActivity.this).addTorequestQueue(logout);
+                        MyRequestHandler.getInstance(ShopsActivity.this).addTorequestQueue(logout);
                     }
                 });
                 builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -362,7 +364,7 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
-        requesthandler.getInstance(this).addTorequestQueue(stringRequest);
+        MyRequestHandler.getInstance(this).addTorequestQueue(stringRequest);
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 1));
 
         shopsRecyclerView.setVisibility(View.VISIBLE);
@@ -402,6 +404,7 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
                                     ShopDetails temp = shops.get(x);
                                     shops.set(x, shops.get(a));
                                     shops.set(a, temp);
+                                    //adapter.notifyItemChanged(x);
                                 }
                             }
                         }
@@ -430,7 +433,7 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
                 return param;
             }
         };
-        requesthandler.getInstance(this).addTorequestQueue(stringRequest);
+        MyRequestHandler.getInstance(this).addTorequestQueue(stringRequest);
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(5000, 3, 1));
 
         shopsRecyclerView.setVisibility(View.VISIBLE);
@@ -512,6 +515,33 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
                     }
                 }
             }, 2000);
+    }
+
+    private boolean isLocationEnabled() {
+        // Check if location services are enabled
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        return locationManager != null && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
+
+    private void enableLocationPrompt() {
+        // Prompt the user to enable location services
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        startActivityForResult(intent, REQUEST_ENABLE_LOCATION);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ENABLE_LOCATION) {
+            // Check if the user enabled location services
+            if (isLocationEnabled()) {
+                getLocationAndShops();
+            } else {
+                Toast.makeText(getApplicationContext(), "please turn on location", Toast.LENGTH_SHORT).show();
+                // Location services are still not enabled
+                // You can inform the user or take appropriate action
+            }
+        }
     }
 
 }

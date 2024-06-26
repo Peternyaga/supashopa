@@ -22,7 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.supashopa_test.Constants;
 import com.example.supashopa_test.ShopDetails;
 import com.example.supashopa_test.ShopsActivity;
-import com.example.supashopa_test.requesthandler;
+import com.example.supashopa_test.MyRequestHandler;
 import com.example.supashopa_test.signUpActivity;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
@@ -164,7 +164,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             }
         });
-        requesthandler.getInstance(this).addTorequestQueue(stringRequest);
+        MyRequestHandler.getInstance(this).addTorequestQueue(stringRequest);
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(3000, 0, 1));
     }
 

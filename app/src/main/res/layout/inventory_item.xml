@@ -1,53 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayoutCompat"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="5dp">
-    <TextView
-        android:id="@+id/inventory_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        />
+    android:layout_margin="5dp"
+    android:elevation="20dp"
+    android:orientation="vertical">
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="5dp">
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/edit_inventory_item"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_image"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+        <TextView
+            android:id="@+id/inventory_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/edit"
-            android:layout_weight="1"
-            android:padding="5dp"
-            android:backgroundTint="#009688"
-            />
-        <Space
-            android:layout_width="40dp"
-            android:layout_height="match_parent"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/out_of_stock"
-            android:layout_width="wrap_content"
+            android:padding="5dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/out_of_stock"
-            android:layout_weight="1"
-            android:padding="5dp"
-            android:backgroundTint="#FFC107"/>
-        <Space
-            android:layout_width="40dp"
-            android:layout_height="match_parent"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/remove_item"
-            android:layout_width="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/unitPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Unit price: "
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/itemStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="status"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/remove"
-            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:padding="5dp"
-            android:backgroundTint="#ED2E6F"/>
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/edit_inventory_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#009688"
+                android:padding="5dp"
+                android:text="@string/edit" />
+
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="match_parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/out_of_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#FFC107"
+                android:padding="5dp"
+                android:text="@string/out_of_stock" />
+
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="match_parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/remove_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#ED2E6F"
+                android:padding="5dp"
+                android:text="@string/remove" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.cardview.widget.CardView>

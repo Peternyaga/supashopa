@@ -108,7 +108,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
             }
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(3000, 2, 2));
-        requesthandler.getInstance(this).addTorequestQueue(stringRequest);
+        MyRequestHandler.getInstance(this).addTorequestQueue(stringRequest);
 
 
     }

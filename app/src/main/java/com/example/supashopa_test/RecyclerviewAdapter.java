@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.supashopa_test.shop_management.Item;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;

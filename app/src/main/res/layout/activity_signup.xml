@@ -7,236 +7,182 @@
     android:background="#3EC0CA33"
     tools:context=".signUpActivity">
 
-    <TextView
-        android:id="@+id/textView25"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:layout_marginBottom="669dp"
-        android:text="supashopa"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#D81B60"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:typeface="serif"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:paddingStart="20dp">
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:text="supashopa"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#D81B60"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="first name"
+            android:textColor="@android:color/holo_purple"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/et_firstname"
+            android:layout_width="284dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="enter your first name"
+            android:inputType="textPersonName"
+            android:singleLine="false"
+            android:textIsSelectable="false"
+            android:textSize="14sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="last name"
+            android:textColor="@android:color/holo_purple"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/et_lastname"
+            android:layout_width="283dp"
+            android:layout_height="wrap_content"
+            android:hint="enter your last name here  "
+            android:inputType="textPersonName"
+            android:singleLine="false"
+            android:textIsSelectable="false"
+            android:textSize="14sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="phone number"
+            android:textColor="@android:color/holo_purple"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="216dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="enter your phone number"
+            android:inputType="phone"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="email"
+            android:textColor="@android:color/holo_purple"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="291dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="enter your email"
+            android:inputType="textEmailAddress"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="password"
+            android:textColor="@android:color/holo_purple"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="292dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="enter your password"
+            android:inputType="textPassword"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="confirm password"
+            android:textColor="@android:color/holo_purple"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/et_confirmpassword"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="confirm your password"
+            android:inputType="textPassword"
+            android:textSize="14sp" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
+
+        <Button
+            android:id="@+id/btn_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="signup"
+            android:textColor="#039BE5"
+            android:layout_gravity="center_horizontal"/>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="already have an account? click "
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/btn_gotologin"
+                android:layout_width="92dp"
+                android:layout_height="37dp"
+                android:layout_gravity="center_horizontal"
+                android:fadingEdge="none"
+                android:fontFamily="sans-serif"
+                android:text="here to login"
+                android:textColor="#1E88E5"
+                android:textSize="8sp"
+                android:typeface="serif" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
-    <EditText
-        android:id="@+id/et_lastname"
-        android:layout_width="283dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="enter your last name here  "
-        android:inputType="textPersonName"
-        android:singleLine="false"
-        android:textIsSelectable="false"
-        android:textSize="14sp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/textView22"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView22"
-        app:layout_constraintTop_toBottomOf="@+id/textView22" />
-
-
-
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="first name"
-        android:textColor="@android:color/holo_purple"
-        android:typeface="serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25"
-        app:layout_constraintVertical_bias="0.048" />
-
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="last name"
-        android:textColor="@android:color/holo_purple"
-        android:typeface="serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView20"
-        app:layout_constraintStart_toStartOf="@+id/textView20"
-        app:layout_constraintTop_toBottomOf="@+id/et_firstname"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="300dp"
-        android:text="phone number"
-        android:textColor="@android:color/holo_purple"
-        android:typeface="serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/et_lastname"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/et_lastname"
-        app:layout_constraintTop_toBottomOf="@+id/et_lastname"
-        app:layout_constraintVertical_bias="0.002" />
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="email"
-        android:textColor="@android:color/holo_purple"
-        android:typeface="serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView26"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView26"
-        app:layout_constraintTop_toBottomOf="@+id/et_phone"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="password"
-        android:textColor="@android:color/holo_purple"
-        android:typeface="serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView27"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView27"
-        app:layout_constraintTop_toBottomOf="@+id/et_email"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="confirm password"
-        android:textColor="@android:color/holo_purple"
-        android:typeface="serif"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView27"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView27"
-        app:layout_constraintTop_toBottomOf="@+id/et_password"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/et_firstname"
-        android:layout_width="284dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="enter your first name"
-        android:inputType="textPersonName"
-        android:singleLine="false"
-        android:textIsSelectable="false"
-        android:textSize="14sp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/textView20"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView20"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
-
-    <EditText
-        android:id="@+id/et_phone"
-        android:layout_width="216dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="enter your phone number"
-        android:inputType="phone"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView26"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView26"
-        app:layout_constraintTop_toBottomOf="@+id/textView26" />
-
-    <EditText
-        android:id="@+id/et_email"
-        android:layout_width="291dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="enter your email"
-        android:inputType="textEmailAddress"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView27"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView27"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
-
-    <EditText
-        android:id="@+id/et_password"
-        android:layout_width="292dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="enter your password"
-        android:inputType="textPassword"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView28"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView28"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
-
-    <EditText
-        android:id="@+id/et_confirmpassword"
-        android:layout_width="295dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="confirm your password"
-        android:inputType="textPassword"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView29"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView29"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
-
-    <Button
-        android:id="@+id/btn_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="signup"
-        android:textColor="#039BE5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.388"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_confirmpassword"
-        app:layout_constraintVertical_bias="0.383" />
-
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="already have an account? click"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/btn_signup"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="@+id/btn_signup"
-        app:layout_constraintTop_toBottomOf="@+id/btn_signup" />
-
-    <Button
-        android:id="@+id/btn_gotologin"
-        android:layout_width="92dp"
-        android:layout_height="37dp"
-        android:fadingEdge="none"
-        android:fontFamily="sans-serif"
-        android:text="here to login"
-        android:textColor="#1E88E5"
-        android:textSize="8sp"
-        android:typeface="serif"
-        app:layout_constraintBottom_toBottomOf="@+id/textView30"
-        app:layout_constraintStart_toEndOf="@+id/textView30"
-        app:layout_constraintTop_toTopOf="@+id/textView30" />
 </androidx.constraintlayout.widget.ConstraintLayout>

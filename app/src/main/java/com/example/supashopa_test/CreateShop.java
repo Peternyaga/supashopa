@@ -1,9 +1,5 @@
 package com.example.supashopa_test;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,8 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -43,6 +44,7 @@ import java.util.Map;
 
 public class CreateShop extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private static final int SELECT_IMAGE_REQUEST_CODE = 1000;
+    ScrollView scrollView;
     EditText shopName, shortCode;
     static  EditText shopDescription;
     Button selectImage, createShop;
@@ -55,8 +57,8 @@ public class CreateShop extends AppCompatActivity implements View.OnClickListene
     JSONArray paymentMethods = new JSONArray();
     ArrayList<String> categories = new ArrayList();
     ArrayList<String> methods = new ArrayList<>();
-    Map params = new HashMap<>();
-    Map headers = new HashMap<>();
+    Map<String, String> params = new HashMap<>();
+    Map<String, String> headers = new HashMap<>();
     Bitmap selectedImageBitmap = null;
     ArrayAdapter<String> shopCategoriesAdapter, paymentMethodsAdapter;
 
@@ -67,6 +69,7 @@ public class CreateShop extends AppCompatActivity implements View.OnClickListene
         Toolbar myToolBar = findViewById(R.id.create_shop_toolbar);
         setSupportActionBar(myToolBar);
 
+        scrollView = findViewById(R.id.create_shop_scroller);
         shopName = findViewById(R.id.enter_shop_name);
         shopDescription = findViewById(R.id.enter_shop_description);
         shortCode = findViewById(R.id.enter_shortcode);
@@ -127,18 +130,25 @@ public class CreateShop extends AppCompatActivity implements View.OnClickListene
                                 @Override
                                 public void onResponse(NetworkResponse response) {
                                     try {
-                                        String responseString = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-                                        Toast.makeText(CreateShop.this, "RESPONSE: "+responseString, Toast.LENGTH_LONG).show();
-                                        shopDescription.setText(responseString);
+                                        JSONObject jsonObject = new JSONObject(new String(response.data, HttpHeaderParser.parseCharset(response.headers)));
+                                        if (jsonObject.getBoolean("code")){
+                                            scrollView.removeAllViews();
+                                            getSupportFragmentManager().beginTransaction()
+                                                    .add(R.id.create_shop_scroller,  CreateShopAdminFragment.newInstance(jsonObject.getString("shop_id"), params.get("shop_name")))
+                                                    .commit();
+                                            Toast.makeText(CreateShop.this, jsonObject.getString("message"), Toast.LENGTH_LONG).show();
+                                            shopDescription.setText(jsonObject.toString());
+                                        }
                                     } catch (UnsupportedEncodingException e) {
+                                        throw new RuntimeException(e);
+                                    } catch (JSONException e) {
                                         throw new RuntimeException(e);
                                     }
                                 }
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(CreateShop.this, "ERROR: ++++++ "+error.getMessage(), Toast.LENGTH_SHORT).show();
-                            shopDescription.setText("error: "+ error.getMessage());
+                            Toast.makeText(CreateShop.this, "An error occurred. Please try again", Toast.LENGTH_SHORT).show();
                         }
                     });
                     multipartRequest.setRetryPolicy(new DefaultRetryPolicy(10000, 2, 1));
@@ -207,7 +217,7 @@ public class CreateShop extends AppCompatActivity implements View.OnClickListene
         }, error -> {
 
         });
-        requesthandler.getInstance(this).addTorequestQueue(request);
+        MyRequestHandler.getInstance(this).addTorequestQueue(request);
     }
 
     @Override
@@ -219,7 +229,7 @@ public class CreateShop extends AppCompatActivity implements View.OnClickListene
                     jsonObject = new JSONObject(shopCategories.get(position - 1).toString());
                     params.put("category",jsonObject.get("id").toString());
                     categorySelected = true;
-                    Toast.makeText(this, "params: " +params.toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "params: " +params.toString(), Toast.LENGTH_SHORT).show();
                 } else if (parent.getId() == R.id.select_payment_method) {
                     jsonObject = new JSONObject(paymentMethods.get(position - 1).toString());
                     params.put("payment",jsonObject.get("id").toString());

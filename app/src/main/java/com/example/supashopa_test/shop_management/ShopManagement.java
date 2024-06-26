@@ -1,10 +1,9 @@
 package com.example.supashopa_test.shop_management;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.supashopa_test.R;
 import com.google.android.material.tabs.TabLayout;
@@ -27,7 +26,7 @@ public class ShopManagement extends AppCompatActivity {
                 (tab, position) -> {
             switch (position){
                 case 0:
-                    tab.setText("shop");
+                    tab.setText("Orders");
                     break;
                 case 1:
                     tab.setText("inventory");
@@ -36,4 +35,5 @@ public class ShopManagement extends AppCompatActivity {
                 }
         ).attach();
     }
+
 }

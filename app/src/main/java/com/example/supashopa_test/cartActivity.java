@@ -40,7 +40,7 @@ import java.util.Map;
 public class cartActivity extends AppCompatActivity implements OnItemClickInterface,View.OnClickListener{
     RecyclerView recyclerView;
     ProgressBar progressBar;
-    EditText confirmPhoneNumber;
+    EditText confirmPhoneNumber, orderNote;
     TextView tvtotal, tvProgressbarMsg, tvCheckoutTotal, tvCheckoutShop, tvServiceCost, tvGrandTotal;
     Button btncheckout, confirmCheckoutDetails;
     LinearLayoutCompat linearLayout, checkoutDetails;
@@ -72,7 +72,9 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
         tvServiceCost =findViewById(R.id.tv_servicecost);
         tvGrandTotal=findViewById(R.id.tv_grandtotal);
         tvCheckoutShop =findViewById(R.id.tv_paymentShopname);
+        orderNote = findViewById(R.id.et_orderNote);
         confirmCheckoutDetails=findViewById(R.id.btn_paymentDetailsOk);
+
         confirmCheckoutDetails.setOnClickListener(this);
 
         Intent intent=getIntent();
@@ -147,14 +149,12 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
             public void onResponse(String response) {
                 tvProgressbarMsg.setText("Please wait.");
                 tvProgressbarMsg.setText(response);
-                //System.exit(0);
-                Toast.makeText(cartActivity.this, "response: "+ response, Toast.LENGTH_LONG).show();
                 try {
                     final JSONObject jsonObject=new JSONObject(response);
                     int responseCode=jsonObject.getInt("responsecode");
                     if(responseCode==0){
                         final String sessionId=jsonObject.getString("sessionid");
-
+                        checkOrderStatus(sessionId);
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -163,8 +163,6 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
                                     public void onResponse(String response) {
                                         progressBar.setVisibility(View.GONE);
                                         tvProgressbarMsg.setVisibility(View.GONE);
-                                        //tvProgressbarMsg.setText(response);
-                                        Toast.makeText(cartActivity.this, "checkOrderStatus response: "+response, Toast.LENGTH_SHORT).show();
                                         String alertMessage="";
                                         int alertCode = 3;
                                         try {
@@ -172,7 +170,7 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
                                                 JSONObject orderStatus=new JSONObject(response);
                                                 if (orderStatus.getInt("payment status") == 1) {
                                                     alertCode=0;
-                                                    alertMessage = "your order has been received!";
+                                                    alertMessage = "your order has been received!\n Order Number: "+ orderStatus.get("id");
                                                 } else {
                                                     alertCode=1;
                                                     alertMessage = "Transaction was unsuccessful.\nTry checking your Mpesa details and try again.";
@@ -252,12 +250,9 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
                                         return params;
                                     }
                                 };
-                                requesthandler.getInstance(cartActivity.this).addTorequestQueue(checkOrderStatus);
+                                MyRequestHandler.getInstance(cartActivity.this).addTorequestQueue(checkOrderStatus);
                             }
                         }, 35000);
-                        //arrayList.clear();
-                        //Snackbar.make(btncheckout,jsonObject.getString("message")+ ". You will be notified once your package is ready. \n THANK YOU FOR SHOPPING WITH US!!", Snackbar.LENGTH_LONG).show();
-
 
                     }else {
                         progressBar.setVisibility(View.GONE);
@@ -298,17 +293,51 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
                 params.put("shop", mySP.getString("shop_db_name",""));
                 params.put ("shop_name", mySP.getString("shop_name", ""));
                 params.put("phone_number", confirmPhoneNumber.getText().toString().trim());
+                params.put("notes", orderNote.getText().toString().trim());
                 return params;
-                //return super.getParams();
             }
         };
             submitOrder.setRetryPolicy(new DefaultRetryPolicy(30000, 1, 1));
 
-            requesthandler.getInstance(this).addTorequestQueue(submitOrder);
+            MyRequestHandler.getInstance(this).addTorequestQueue(submitOrder);
 
         } catch (JSONException e) {
                 e.printStackTrace();
             }
+    }
+
+    private  int checkOrderStatus(String sessionId){
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    for (int i = 0; i<5; i++) {
+                    StringRequest checkOrderStatus=new StringRequest(Request.Method.POST, Constants.CHECK_ORDER_STATUS, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }){
+                        @Nullable
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> params=new HashMap();
+                            params.put("session_id", sessionId);
+                            params.put("shop", Constants.shopDbName);
+                            return params;
+                        }
+                    };
+
+                        MyRequestHandler.getInstance(cartActivity.this).addTorequestQueue(checkOrderStatus);
+                    }
+                }
+            }, 5000);
+        return 101;
     }
 
     @Override
@@ -343,10 +372,11 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         cartItems.clear();
-        JSONObject returnedItems=new JSONObject();
-        Intent intent=new Intent(this, shoppingActivity.class);
-        for(int i=0; i<arrayList.size(); i++){
+        JSONObject returnedItems = new JSONObject();
+        Intent intent = new Intent(this, shoppingActivity.class);
+        for (int i = 0; i < arrayList.size(); i++) {
             try {
                 returnedItems.put("product_id", arrayList.get(i).getProductid());
                 returnedItems.put("name", arrayList.get(i).getProductname());
@@ -361,7 +391,7 @@ public class cartActivity extends AppCompatActivity implements OnItemClickInterf
             }
         }
         intent.putStringArrayListExtra("cart items", cartItems);
-        setResult(2,intent);
+        setResult(2, intent);
         finish();
     }
 

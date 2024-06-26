@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.supashopa_test.shop_management.orders.OrdersFragment;
+
 public class MyPagerAdapter extends FragmentStateAdapter {
     public MyPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
@@ -15,7 +17,7 @@ public class MyPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new ShopFragment();
+                return new OrdersFragment();
             case 1:
                 return new InventoryFragment();
             default:

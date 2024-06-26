@@ -1,18 +1,19 @@
-package com.example.supashopa_test;
+package com.example.supashopa_test.shop_management;
 
 public class Item {
-    private int productid;
+    private int productid, productStatus;
     private String productname;
     private String productpic_url;
     private String price;
     private String category;
 
-    public Item(int id, String name, String pic_url, String price, String category){
+    public Item(int id, String name, String pic_url, String price, String category, int status){
         this.productid=id;
         this.productname=name;
         this.productpic_url=pic_url;
         this.price=price;
         this.category=category;
+        this.productStatus = status;
     }
 
     public int getProductid() {
@@ -53,5 +54,13 @@ public class Item {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public int getProductStatus() {
+        return productStatus;
+    }
+
+    public void setProductStatus(int productStatus) {
+        this.productStatus = productStatus;
     }
 }

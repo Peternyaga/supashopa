@@ -122,7 +122,7 @@ public class signUpActivity extends AppCompatActivity implements View.OnClickLis
             }
         };
        StringRequest.setRetryPolicy(new DefaultRetryPolicy(3000, 3,2));
-        requesthandler.getInstance(this).addTorequestQueue(StringRequest);
+        MyRequestHandler.getInstance(this).addTorequestQueue(StringRequest);
     }
 
     @Override

@@ -6,19 +6,19 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-public class requesthandler {
-    private static requesthandler mInstance;
+public class MyRequestHandler {
+    private static MyRequestHandler mInstance;
     private RequestQueue mRequestQueue;
     private static Context mCtx;
 
-    private requesthandler(Context context){
+    private MyRequestHandler(Context context){
         mCtx=context;
         mRequestQueue=getRequestqueue();
     }
 
-    public static synchronized requesthandler getInstance(Context context){
+    public static synchronized MyRequestHandler getInstance(Context context){
         if(mInstance==null){
-            mInstance=new requesthandler(context);
+            mInstance=new MyRequestHandler(context);
         }
         return mInstance;
     }

@@ -25,6 +25,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".shop_management.AddInventoryItem"
+            android:exported="false" />
+        <activity
+            android:name=".shop_management.ShopkeeperLogin"
+            android:exported="false" />
+        <activity
             android:name=".shop_management.ShopManagement"
             android:exported="false"
             android:label="@string/title_activity_shop_management"

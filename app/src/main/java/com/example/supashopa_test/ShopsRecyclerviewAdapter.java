@@ -46,6 +46,7 @@ public class ShopsRecyclerviewAdapter extends RecyclerView.Adapter<ShopViewHolde
                 ShopsActivity.mySPEditor.putString("shop_name", shop.getShopname());
                 ShopsActivity.mySPEditor.commit();
                 Constants.shopName=shop.getShopname();
+                Constants.currentShopId = String.valueOf(shop.getShopCode());
                 context.startActivity(intent);
                 ((Activity) context).finish();
 

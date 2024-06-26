@@ -9,5 +9,10 @@
 
     <item android:id="@+id/logout"
         android:title="logout"/>
+    <item
+        android:id="@+id/shop_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="shop management" />
 
 </menu>
