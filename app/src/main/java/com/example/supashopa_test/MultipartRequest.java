@@ -1,18 +1,19 @@
 package com.example.supashopa_test;
 
 import android.graphics.Bitmap;
+
 import androidx.annotation.Nullable;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.Map;
 
 public class MultipartRequest extends Request<NetworkResponse> {

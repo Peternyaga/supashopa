@@ -123,13 +123,9 @@ public class AddInventoryItem extends AppCompatActivity implements View.OnClickL
                             try (FileOutputStream out = new FileOutputStream(file)) {
                                 BitmapFactory.decodeStream(inputStream).compress(Bitmap.CompressFormat.JPEG,50, out);
                                 selectedImage = new Compressor(this).compressToBitmap(file);
-                                //selectedImage = BitmapFactory.decodeFile(file.getAbsolutePath());
-                                //selectedImage.
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
-
-                           // itemImage.setImageURI(file.);
                             itemImage.setImageBitmap(selectedImage);
                             imageIsSelected = true;
                         } catch (FileNotFoundException e) {

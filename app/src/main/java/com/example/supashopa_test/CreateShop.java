@@ -35,12 +35,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import id.zelory.compressor.Compressor;
 
 public class CreateShop extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private static final int SELECT_IMAGE_REQUEST_CODE = 1000;
@@ -176,16 +181,26 @@ public class CreateShop extends AppCompatActivity implements View.OnClickListene
             Uri selectedImage = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(selectedImage);
-                selectedImageBitmap = BitmapFactory.decodeStream(inputStream);
-                shopImage.setImageBitmap(selectedImageBitmap);
-                shopImageSelected = true;
-                shopImage.setMaxHeight(250);
+                //selectedImageBitmap = BitmapFactory.decodeStream(inputStream);
+                File file = new File(getCacheDir(), "compressed_image.jpg");
+                try (FileOutputStream out = new FileOutputStream(file)) {
+                        BitmapFactory.decodeStream(inputStream).compress(Bitmap.CompressFormat.JPEG,100, out);
+                    while (file.length()/1024 > 500){
+                        file = new Compressor(this).compressToFile(file);
+                    }
+                    selectedImageBitmap = new Compressor(this).compressToBitmap(file);
+                    shopImage.setImageBitmap(selectedImageBitmap);
+                    shopImageSelected = true;
+                    shopImage.setMaxHeight(250);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            Toast.makeText(this, "uri: " + selectedImage, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Result code: " + resultCode, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Image not selected!", Toast.LENGTH_SHORT).show();
         }
     }
 
