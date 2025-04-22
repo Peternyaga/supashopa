@@ -1,0 +1,46 @@
+package com.supashop.supashop;
+
+import java.util.ArrayList;
+
+public class Constants {
+    //      private static final String ROOT_URL ="http://192.168.137.1/";
+    //private static final String API_URL="https://probable-weasel-newly.ngrok-free.app/";
+    private static final String API_URL ="https://api.supashop.co.ke/";
+    //private static final String API_URL=ROOT_URL.trim()+ "supashopa_APIs/v1/";
+    //private static final String API_URL_2=ROOT_URL_2.trim()+ "supashopa_APIs/v1/";
+    public static final String IMAGESOFSHOPS_ROOT_URL=API_URL.trim()+"shop_images/";
+    public static final String IMAGESOFITEMS_ROOT_URL=API_URL.trim()+"catalogue_images/";
+    public static final String URL_REGISTER= API_URL +"registerUser.php";
+    public static final String URL_LOGIN= API_URL +"login.php";
+    public static final String URL_LOGOUT = API_URL + "logout.php";
+    public static final String urlFetchItems = API_URL +"fetch_shop_items.php";
+    public static final String URL_CHECKOUT= API_URL +"checkout.php";
+    public static  final String URL_SEARCHITEMS= API_URL +"item_search.php";
+    public static  final String URL_SHOPS= API_URL +"fetch_shops.php";
+    public static  final String URL_FETCHSHOPCATEGORIES= API_URL +"fetch_shop_categories.php";
+    public static  final String URL_FETCHPAYMENTMETHODS= API_URL +"fetch_payment_methods.php";
+    public static  final String fetchInventoryItemCategories= API_URL +"cashier/fetch_inventory_item_categories.php";
+    public static  final String addInventoryItem = API_URL +"cashier/addInventoryItem.php";
+    public static  final String urlSearchForShop= API_URL+ "search_For_Shop.php";
+    public static final String CHECK_ORDER_STATUS= API_URL+"check_order_status.php";
+    public static final String urlCreateShop= API_URL+"create_shop.php";
+    public static final String fetchInventory= API_URL+"fetch_my_inventory.php";
+    public static final String changeInventoryItemStatus= API_URL+"changeItemStatus.php";
+    public static final String FETCH_ORDERS = API_URL+"cashier/getOrders.php";
+    public static final String updateOrderStatusURL = API_URL+"cashier/UpdateOrderStatus.php";
+    public static final String registerShopkeeper = API_URL+"cashier/createShopkeeper.php";
+    public static final String shopkeeperLogin = API_URL+"cashier/attendantLogin.php";
+    public static String myShopId = "0";
+    public static String currentShopId = "0";
+
+    public static String shopDbName;//name of the shop the user has entered;
+    public static String shopName;
+    public static int recursion=0;
+    public static ArrayList cartItems=new ArrayList();
+}
+
+
+
+
+
+

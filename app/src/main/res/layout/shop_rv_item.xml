@@ -15,8 +15,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivshoppic"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:padding="5dp">
+        android:layout_height="250dp">
 
     </androidx.appcompat.widget.AppCompatImageView>
 

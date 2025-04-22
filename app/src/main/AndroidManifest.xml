@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:targetSandboxVersion="2"
     android:versionCode="1"
     android:versionName="1.0">
@@ -64,15 +65,16 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+
         <provider
             android:name="com.squareup.picasso.PicassoProvider"
-            android:authorities="com.example.supashopa_test.com.squareup.picasso"
-            android:exported="false" />
+            android:authorities="com.supashop.supashop.com.squareup.picasso"
+            android:exported="false"
+            tools:replace="android:authorities" />
     </application>
 
 </manifest>

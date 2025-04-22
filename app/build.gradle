@@ -4,17 +4,31 @@ android {
     compileSdk 34
     //buildToolsVersion '34.0.0'
     defaultConfig {
-        applicationId "com.example.supashopa_test"
+        applicationId "com.supashop.supashop"
         minSdkVersion 24
-        targetSdkVersion 31
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release {
+            storeFile file("path/to/your/keystore.jks") // Replace with your keystore path
+            storePassword "your_keystore_password" // Replace with your keystore password
+            keyAlias "your_key_alias" // Replace with your key alias
+            keyPassword "your_key_password" // Replace with your key password
+        }
+    }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
         }
     }
     packagingOptions {
@@ -22,7 +36,7 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
     }
-    namespace 'com.example.supashopa_test'
+    namespace 'com.supashop.supashop'
     buildFeatures {
         viewBinding true
     }
@@ -41,6 +55,7 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.7.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
+    implementation 'androidx.activity:activity:1.8.0'
     //implementation 'androidx.annotation:annotation-jvm:1.7.1'
     //implementation "androidx.lifecycle:lifecycle-process:2.5.1"
     testImplementation 'junit:junit:4.12'

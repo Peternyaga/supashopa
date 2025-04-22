@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">supashopa</string>
+    <string name="app_name">SupaShop</string>
     <string name="first_name">first_name</string>
     <string name="title_activity_supashopa_login">Sign in</string>
     <string name="prompt_email">Email</string>
@@ -35,4 +35,19 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_shopkeeper_login">ShopkeeperLoginActivity</string>
     <string name="write_note">Attach a note to your order</string>
+    <string name="shop_image_description">An image of your shop that customers can recognize</string>
+    <string name="select_image">Select an image</string>
+    <string name="select_payment_method_hint">Select a payment method</string>
+    <string name="enter_till_number">Enter Till Number</string>
+    <string name="enter_till_number_hint">Till Number</string>
+    <string name="enter_paybill_number">Enter Paybill Number</string>
+    <string name="enter_paybill_number_hint">Paybill Number</string>
+    <string name="enter_account_number">Enter Account Number</string>
+    <string name="enter_account_number_hint">Account Number</string>
+
+    <!-- Error messages -->
+    <string name="account_number_required">Account Number is required for Paybill payment</string>
+    <string name="location_access_failed">Location access failed. Please go back and try again</string>
+    <string name="error_try_again">An error occurred. Please try again</string>
+    <string name="all_fields_required">All fields are required</string>
 </resources>

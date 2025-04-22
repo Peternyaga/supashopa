@@ -7,4 +7,4 @@ pluginManagement{
 }
 
 include ':app'
-rootProject.name='supashopa_test'
+rootProject.name='com.supashop.supashop'

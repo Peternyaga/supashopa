@@ -11,10 +11,8 @@
         android:id="@+id/create_shop_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:background="@color/colorPrimaryDark"
         app:titleTextAppearance="@style/Base.CardView"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,190 +21,171 @@
     <ScrollView
         android:id="@+id/create_shop_scroller"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="60dp"
-        android:padding="5dp"
-        android:scrollY="@android:dimen/thumbnail_height"
+        android:layout_height="0dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_shop_toolbar">
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <!-- Shop Name Section -->
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:text="@string/enter_shop_name" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:padding="5dp"
-                    android:text="@string/enter_shop_name" />
-
-                <EditText
-                    android:id="@+id/enter_shop_name"
-                    style="@style/CustomTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:height="48dp"
-                    android:hint="@string/enter_shop_name_hint"
-                    android:inputType="textMultiLine"
-                    android:maxLines="2"
-                    android:minLines="2" />
-
-            </LinearLayout>
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/enter_shop_name"
+                style="@style/CustomTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:padding="5dp">
+                android:background="@drawable/edit_text_background"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"
+                android:inputType="text"
+                android:hint="@string/enter_shop_name_hint" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:padding="5dp"
-                    android:text="@string/enter_shop_description" />
-
-                <EditText
-                    android:id="@+id/enter_shop_description"
-                    style="@style/CustomTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:height="48dp"
-                    android:hint="@string/enter_shop_description_hint"
-                    android:inputType="textMultiLine"
-                    android:maxLines="10"
-                    android:minLines="4"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:scrollbars="vertical" />
-            </LinearLayout>
-
-            <LinearLayout
+            <!-- Shop Description Section -->
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:padding="5dp">
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:text="@string/enter_shop_description" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:padding="5dp"
-                    android:text="@string/select_shop_category" />
-
-                <Spinner
-                    android:id="@+id/select_shop_category"
-                    style="@style/CustomTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:height="48dp"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:prompt="@string/select_shop_category_hint" />
-            </LinearLayout>
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/enter_shop_description"
+                style="@style/CustomTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp">
+                android:background="@drawable/edit_text_background"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"
+                android:minLines="3"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:hint="@string/enter_shop_description_hint" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:padding="5dp"
-                    android:text="@string/select_shop_image" />
+            <!-- Shop Category Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:text="@string/select_shop_category" />
+
+            <Spinner
+                android:id="@+id/select_shop_category"
+                style="@style/CustomTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginBottom="16dp"
+                android:padding="8dp"
+                android:prompt="@string/select_shop_category_hint" />
+
+            <!-- Shop Image Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:text="@string/select_shop_image" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
 
                 <ImageView
                     android:id="@+id/select_shop_image"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:adjustViewBounds="true"
+                    android:layout_height="200dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/outline_image_24"/>
+                    android:background="#EEEEEE"
+                    android:src="@drawable/outline_image_24" />
 
                 <Button
                     android:id="@+id/btn_select_shop_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="16dp"
                     android:text="@string/select_shop_image" />
+            </FrameLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
+            <!-- Payment Method Section -->
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:padding="5dp">
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:text="@string/select_payment_method" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:padding="5dp"
-                    android:text="@string/select_payment_method" />
+            <Spinner
+                android:id="@+id/select_payment_method"
+                style="@style/CustomTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginBottom="16dp"
+                android:padding="8dp"
+                android:prompt="@string/select_payment_method_hint" />
 
-                <Spinner
-                    android:id="@+id/select_payment_method"
-                    style="@style/CustomTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginBottom="8dp"
-                    android:height="48dp"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:prompt="@string/select_shop_category_hint" />
-
-                <EditText
-                    android:id="@+id/enter_shortcode"
-                    style="@style/CustomTextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:height="48dp"
-                    android:gravity="center_horizontal"
-                    android:hint="@string/enter_payment_details_hint"
-                    android:inputType="number"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp" />
-            </LinearLayout>
-
-            <LinearLayout
+            <!-- Payment Details Section -->
+            <TextView
+                android:id="@+id/tv_shortcode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:padding="5dp">
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:text="@string/enter_payment_details_hint" />
 
-                <Button
-                    android:id="@+id/btn_create"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/create_shop" />
+            <EditText
+                android:id="@+id/enter_shortcode"
+                style="@style/CustomTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:padding="12dp"
+                android:layout_marginBottom="24dp"
+                android:inputType="number"
+                android:hint="@string/enter_payment_details_hint" />
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_accountRef"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:padding="5dp"
+                android:text="@string/enter_payment_details_hint" />
 
+            <EditText
+                android:id="@+id/enter_account_ref"
+                style="@style/CustomTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:padding="12dp"
+                android:layout_marginBottom="24dp"
+                android:inputType="text"
+                android:hint="@string/enter_account_number" />
+
+            <!-- Create Button -->
+            <Button
+                android:id="@+id/btn_create"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="@string/create_shop" />
 
         </LinearLayout>
-
-
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
