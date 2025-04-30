@@ -205,8 +205,12 @@ public class ShopsActivity extends AppCompatActivity implements View.OnClickList
         alertBuilder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ActivityCompat.requestPermissions(ShopsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
-                ActivityCompat.requestPermissions(ShopsActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+                ActivityCompat.requestPermissions(
+                        ShopsActivity.this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                        LOCATION_PERMISSION_REQUEST_CODE
+                );
+
             }
         });
         AlertDialog alert = alertBuilder.create();

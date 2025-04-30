@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,7 +53,7 @@ public class signUpActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    private void registeruser() {
+    private void registerUser() {
        //String confirm_password=edittextconfirmpassword.getText().toString().trim();
        final String user_id="";
         progressDialog.setMessage("registering user...");
@@ -126,34 +127,71 @@ public class signUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        if (v.getId() == R.id.btn_signup) {
+            String first = edittextfirstname.getText().toString().trim();
+            String last  = edittextlastname.getText().toString().trim();
+            String phoneNo = edittextphone.getText().toString().trim();
+            String mail  = edittextemail.getText().toString().trim();
+            String pwd   = edittextpassword.getText().toString();
+            String conf  = edittextconfirmpassword.getText().toString();
 
-            case R.id.btn_signup:
-                first_name=edittextfirstname.getText().toString().trim();
-                last_name= edittextlastname.getText().toString().trim();
-                phone=edittextphone.getText().toString().trim();
-                email=edittextemail.getText().toString().trim();
-                password=edittextpassword.getText().toString().trim();
+            // 1. Non-empty
+            if (first.isEmpty() || last.isEmpty() || phoneNo.isEmpty() || mail.isEmpty() || pwd.isEmpty()) {
+                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-                if (first_name.isEmpty()|| last_name.isEmpty()|| phone.isEmpty()|| email.isEmpty()|| password.isEmpty()) {
-                    Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
-                }else {
-                    if ((edittextpassword.getText().toString().trim()).equals(edittextconfirmpassword.getText().toString().trim())) {
-                        registeruser();
-                    } else {
-                        edittextconfirmpassword.requestFocus();
-                        Toast.makeText(getApplicationContext(), "please confirm your password", Toast.LENGTH_SHORT).show();
-                    }
+            // 2. Clean input by removing common formatting characters (optional)
+            String cleanedPhone = phoneNo.replaceAll("[\\s\\-()]", "");
+
+            if (cleanedPhone.startsWith("+")) {
+                // International format: + followed by 7–15 digits, no leading zeros after country code
+                if (!cleanedPhone.matches("^\\+[1-9]\\d{6,14}$")) {
+                    edittextphone.setError("Invalid international phone number format");
+                    edittextphone.requestFocus();
+                    return;
                 }
+            } else {
+                // Local format: e.g., starts with 07, 01 (Kenya mobile numbers), 10 digits
+                if (!cleanedPhone.matches("^(07|01)\\d{8}$")) {
+                    edittextphone.setError("Invalid local phone number format");
+                    edittextphone.requestFocus();
+                    return;
+                }
+            }
+
+            // 3. Email format
+            if (!Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
+                edittextemail.setError("Invalid email");
+                edittextemail.requestFocus();
+                return;
+            }
 
 
-            break;
-
-            case R.id.btn_gotologin:
-             Intent intent=new Intent(getApplicationContext(),login.class);
-             startActivity(intent);
-             finish();
-
+            // 4. Password strength
+//            if (!pwd.matches("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,}$")) {
+//                edittextpassword.setError("Weak password");
+//                edittextpassword.requestFocus();
+//                return;
+//            }
+            // 5. Confirm password
+            if (!pwd.equals(conf)) {
+                edittextconfirmpassword.setError("Passwords do not match");
+                edittextconfirmpassword.requestFocus();
+                return;
+            }
+            // Everything’s valid!
+            first_name = first;
+            last_name  = last;
+            phone      = phoneNo;
+            email      = mail;
+            password   = pwd;
+            registerUser();
+        }
+        else if (v.getId() == R.id.btn_gotologin) {
+            startActivity(new Intent(this, login.class));
+            finish();
         }
     }
+
 }

@@ -218,32 +218,69 @@ public class CreateShop extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SELECT_IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == SELECT_IMAGE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             try {
                 InputStream inputStream = getContentResolver().openInputStream(selectedImage);
-                //selectedImageBitmap = BitmapFactory.decodeStream(inputStream);
-                File file = new File(getCacheDir(), "compressed_image.jpg");
-                try (FileOutputStream out = new FileOutputStream(file)) {
-                        BitmapFactory.decodeStream(inputStream).compress(Bitmap.CompressFormat.JPEG,100, out);
-                    while (file.length()/1024 > 500){
-                        file = new Compressor(this).compressToFile(file);
-                    }
-                    selectedImageBitmap = new Compressor(this).compressToBitmap(file);
-                    shopImage.setImageBitmap(selectedImageBitmap);
-                    shopImageSelected = true;
-                    shopImage.setMaxHeight(250);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                Bitmap originalBitmap = BitmapFactory.decodeStream(inputStream);
+
+                // Get the aspect ratio of the shopImage ImageView
+                int imageViewWidth = shopImage.getWidth();
+                int imageViewHeight = shopImage.getHeight();
+
+                if (imageViewWidth == 0 || imageViewHeight == 0) {
+                    // Fallback if view is not measured yet
+                    imageViewWidth = 1;
+                    imageViewHeight = 1;
                 }
 
-            } catch (FileNotFoundException e) {
+                float targetRatio = (float) imageViewWidth / (float) imageViewHeight;
+                int originalWidth = originalBitmap.getWidth();
+                int originalHeight = originalBitmap.getHeight();
+                float originalRatio = (float) originalWidth / (float) originalHeight;
+
+                int cropWidth, cropHeight;
+                if (originalRatio > targetRatio) {
+                    // Image is too wide
+                    cropHeight = originalHeight;
+                    cropWidth = (int) (cropHeight * targetRatio);
+                } else {
+                    // Image is too tall
+                    cropWidth = originalWidth;
+                    cropHeight = (int) (cropWidth / targetRatio);
+                }
+
+                // Calculate crop start points
+                int cropStartX = (originalWidth - cropWidth) / 2;
+                int cropStartY = (originalHeight - cropHeight) / 2;
+
+                // Perform the crop
+                Bitmap croppedBitmap = Bitmap.createBitmap(originalBitmap, cropStartX, cropStartY, cropWidth, cropHeight);
+
+                // Now compress the cropped bitmap
+                File file = new File(getCacheDir(), "compressed_image.jpg");
+                try (FileOutputStream out = new FileOutputStream(file)) {
+                    croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                }
+
+                while (file.length() / 1024 > 500) {
+                    file = new Compressor(this).compressToFile(file);
+                }
+
+                selectedImageBitmap = new Compressor(this).compressToBitmap(file);
+                shopImage.setImageBitmap(selectedImageBitmap);
+                shopImageSelected = true;
+                shopImage.setMaxHeight(250);
+
+            } catch (IOException e) {
                 e.printStackTrace();
+                Toast.makeText(this, "Error loading image", Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(this, "Image not selected!", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     void stringGetRequest(String url, int requestCode){
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
