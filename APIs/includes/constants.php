@@ -1,8 +1,6 @@
 <?php
-define('DB_NAME','db_supashopa');
-define('DB_HOST','localhost');
-define('DB_PASSWORD','REMOVED_ROTATE_CREDENTIAL');
-define('DB_USER','guest');
-
-//ITLAB_PASSWORD=REMOVED_ROTATE_CREDENTIAL;
+define('DB_NAME', getenv('DB_NAME'));
+define('DB_HOST', getenv('DB_HOST'));
+define('DB_PASSWORD', getenv('DB_PASSWORD'));
+define('DB_USER', getenv('DB_USER'));
 ?>
